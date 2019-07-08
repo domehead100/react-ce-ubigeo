@@ -46,7 +46,7 @@ const Uploader: SFC = function () {
           }}
           >
           <img src={cloud} alt="upload" />
-          <p>Haz click aquí para subir</p>
+          <p>Suelta o haz click aquí para subir</p>
         </label>
         {
           Object.keys(ubigeo).length ? (
