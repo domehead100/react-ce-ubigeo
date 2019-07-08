@@ -1,7 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-> You can find the tutorial [here]().
-
 ## Background
 
 A element, by definition and spec, cannot accept complex properties like objects or arrays. This is a problem when we want to use these kinds of properties in a React project.
