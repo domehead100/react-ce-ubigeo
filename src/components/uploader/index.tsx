@@ -46,12 +46,12 @@ const Uploader: SFC = function () {
           }}
           >
           <img src={cloud} alt="upload" />
-          <p>Suelta o haz click aquí para subir</p>
+          <p>Drop or click here to upload</p>
         </label>
         {
           Object.keys(ubigeo).length ? (
             <div>
-              <h3>Reporte de Ubigeo</h3>
+              <h3>Ubigeo Report</h3>
               <ubigeo-table
                 rows={ubigeo}
               />
@@ -68,7 +68,7 @@ const Uploader: SFC = function () {
       {
         Object.keys(ubigeo).length ? (
           <div>
-            <h3>Reporte de Ubigeo</h3>
+            <h3>Ubigeo Report</h3>
             <ubigeo-table
               rows={ubigeo}
             />
@@ -76,7 +76,7 @@ const Uploader: SFC = function () {
         ) : (
           <label htmlFor="upload" className="upload-area">
             <img src={cloud} alt="upload" />
-            <p>Haz click aquí para subir</p>
+            <p>Click here to upload</p>
           </label>
         )
       }
