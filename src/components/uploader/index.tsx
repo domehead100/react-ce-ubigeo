@@ -2,6 +2,7 @@
 import { SFC, useContext, ChangeEvent } from 'react'
 import Context, { MainContext } from '../../store/context'
 import fileToJson from '../../utils/file-to-json'
+import DragnDrop from '../../lib/dragndrop'
 import customElements from '../../lib/pragma'
 import cloud from '../../svg/cloud.svg'
 import './index.css'
@@ -9,17 +10,24 @@ import './index.css'
 const Uploader: SFC = function () {
   const { ubigeo, setUbigeo }: MainContext = useContext(Context)
 
+  const onFileDrop = async function(file: File) {
+    putInTable(file)
+  }
+
   const onFileSelect = async function (e: ChangeEvent<HTMLInputElement>) {
     const files: FileList | null = e.target.files
     if (files) {
-      const txt: File = files[0]
-      try {
-        const dataJson = await fileToJson(txt)
-        console.log(dataJson)
-        setUbigeo(dataJson)
-      } catch (e) {
-        alert(e.message)
-      }
+      const file: File = files[0]
+      putInTable(file)
+    }
+  }
+
+  const putInTable = async function (file: File) {
+    try {
+      const dataJson = await fileToJson(file)
+      setUbigeo(dataJson)
+    } catch (e) {
+      alert(e.message)
     }
   }
 
@@ -29,7 +37,14 @@ const Uploader: SFC = function () {
     return (
       <div>
         <input id="upload" type="file" onChange={onFileSelect} />
-        <label htmlFor="upload" className="upload-area">
+        <label
+          htmlFor="upload"
+          className="upload-area"
+          onDragOver={DragnDrop.onDragOver}
+          onDrop={e => {
+            DragnDrop.onDrop(e, onFileDrop)
+          }}
+          >
           <img src={cloud} alt="upload" />
           <p>Haz click aquí para subir</p>
         </label>
