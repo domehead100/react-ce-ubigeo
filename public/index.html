@@ -67,14 +67,14 @@
       static get styles() {
         return css`
           :host > table {
+            display: block;
             border-radius: 5px;
+            width: 100%;
           }
           table {
-            border: 1px solid #666;
+            border: 1px solid #ddd;
             border-collapse: collapse;
-            display: block;
             overflow: auto;
-            width: 100%;
           }
           th, td {
             padding: 10px;
@@ -83,25 +83,30 @@
           }
           th:not(:last-of-type),
           td:not(:last-of-type) {
-            border-right: 1px solid #666;
+            border-right: 1px solid #ddd;
           }
           th {
-            background: #333;
-            color: #888;
+            background: #f2f3f4;
+            color: #777;
           }
           td {
-            color: #888;
+            color: #444;
           }
           thead tr {
-            border-bottom: 1px solid #666;
+            border-bottom: 1px solid #ddd;
           }
           tbody tr:not(:last-of-type) {
-            border-bottom: 1px solid #666;
+            border-bottom: 1px solid #ddd;
           }
           td table {
             border: none;
             margin: -10px;
             width: calc(100% + 20px);
+          }
+          @media screen and (min-width: 980px) {
+            :host > table {
+              display: table;
+            }
           }
         `
       }
