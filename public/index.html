@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#212121" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -34,5 +34,169 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script type="module">
+    import { LitElement, html, css, property } from 'https://unpkg.com/lit-element@2.2.0/lit-element.js?module'
+
+    const converter = {
+      toAttribute(value, type) {
+        return JSON.stringify(value)
+      },
+      fromAttribute(value, type) {
+        const isObject = type.prototype.constructor.name === 'Object'
+        try {
+          return JSON.parse(value)
+        } catch (o_O) {
+          return isObject ? {} : []
+        }
+      }
+    }
+
+    class UbigeoTable extends LitElement {
+      constructor() {
+        super(...arguments)
+        this.rows = {}
+      }
+
+      static get properties() {
+        return {
+          rows: { type: Array, converter }
+        }
+      }
+
+      static get styles() {
+        return css`
+          :host > table {
+            border-radius: 5px;
+          }
+          table {
+            border: 1px solid #666;
+            border-collapse: collapse;
+            display: block;
+            overflow: auto;
+            width: 100%;
+          }
+          th, td {
+            padding: 10px;
+            font-size: 15px;
+            text-align: center;
+          }
+          th:not(:last-of-type),
+          td:not(:last-of-type) {
+            border-right: 1px solid #666;
+          }
+          th {
+            background: #333;
+            color: #888;
+          }
+          td {
+            color: #888;
+          }
+          thead tr {
+            border-bottom: 1px solid #666;
+          }
+          tbody tr:not(:last-of-type) {
+            border-bottom: 1px solid #666;
+          }
+          td table {
+            border: none;
+            margin: -10px;
+            width: calc(100% + 20px);
+          }
+        `
+      }
+
+      _renderRows() {
+        return this.rows.map(department => html`
+          <tr @click=${this._toggleSelect.bind(this, department)}>
+            <td>${department.code}</td>
+            <td>${department.name}</td>
+            <td>
+              ${this._renderProvinces(department.provinces)}
+            </td>
+          </tr>  
+        `)
+      }
+
+      _renderProvinces(provinces) {
+        if (!provinces.length) { return }
+        return html`
+          <table>
+            <thead>
+              <tr>
+                <th>Postal</th>
+                <th>Provincia</th>
+                <th>Distritos</th>  
+              </tr>
+            </thead>
+            <tbody>
+              ${
+                provinces.map(province => html`
+                  <tr>
+                    <td>${province.code}</td>
+                    <td>${province.name}</td>
+                    <td>${this._renderDistricts(province.districts)}</td>
+                  </tr>
+                `)
+              }
+            </tbody>
+          </table>
+        `
+      }
+
+      _renderDistricts(districts) {
+        if (!districts.length) { return }
+        return html`
+          <table>
+            <thead>
+              <tr>
+                <th>Postal</th>
+                <th>Distrito</th> 
+              </tr>
+            </thead>
+            <tbody>
+              ${
+                districts.map((district) => html`
+                  <tr>
+                    <td>${district.code}</td>
+                    <td>${district.name}</td>
+                  </tr>
+                `)
+              }
+            </tbody>
+          </table>
+        `
+      }
+
+      _toggleSelect(row, x) {
+        console.log(row, x)
+        const detail = row.code
+        const event = new CustomEvent('toggle-row', { detail })
+        this.dispatchEvent(event)
+      }
+
+      render() {
+        return html`
+          <table>
+            <thead>
+              <tr>
+                <th>Postal</th>
+                <th>Departamento</th>
+                <th>Provincias</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${this._renderRows()}
+            </tbody>
+          </table>
+        `
+      }
+    }
+
+    if (!customElements.get('ubigeo-table')) {
+      customElements.define('ubigeo-table', UbigeoTable)
+    }
+
+    </script>
   </body>
 </html>
