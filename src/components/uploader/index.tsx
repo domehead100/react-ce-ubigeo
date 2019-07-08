@@ -23,6 +23,30 @@ const Uploader: SFC = function () {
     }
   }
 
+  const IS_DESKTOP = matchMedia('(min-width: 980px').matches
+  
+  if (IS_DESKTOP) {
+    return (
+      <div>
+        <input id="upload" type="file" onChange={onFileSelect} />
+        <label htmlFor="upload" className="upload-area">
+          <img src={cloud} alt="upload" />
+          <p>Haz click aquí para subir</p>
+        </label>
+        {
+          Object.keys(ubigeo).length ? (
+            <div>
+              <h3>Reporte de Ubigeo</h3>
+              <ubigeo-table
+                rows={ubigeo}
+              />
+            </div>
+          ) : null
+        }
+      </div>
+    )
+  }
+
   return (
     <div>
       <input id="upload" type="file" onChange={onFileSelect} />
@@ -37,7 +61,7 @@ const Uploader: SFC = function () {
         ) : (
           <label htmlFor="upload" className="upload-area">
             <img src={cloud} alt="upload" />
-            <p>Suelta o haz click aquí para subir</p>
+            <p>Haz click aquí para subir</p>
           </label>
         )
       }
