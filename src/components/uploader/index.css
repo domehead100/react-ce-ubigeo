@@ -1,3 +1,48 @@
 input {
   display: none;
 }
+h3 {
+  color: #09c;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.upload-area {
+  background: #f2f3f4;
+  display: flex;
+  height: calc(100vh - 60px);
+  border: 3px dashed #bbb;
+  box-sizing: border-box;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.upload-area img {
+  max-width: 140px;
+  margin-top: -60px;
+}
+.upload-area p {
+  display: block;
+  padding: 10px;
+  color: #888;
+  font-weight: 500;
+}
+@media screen and (min-width: 980px) {
+  .upload-area {
+    height: 200px;
+    padding: 40px;
+  }
+  .upload-area img {
+    max-width: 100px;
+    margin: 0;
+  }
+  .upload-area p {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  h3 {
+    padding: 0;
+  }
+}
