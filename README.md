@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to test
+
+Just run the app and drop/choose the `ubigeo.txt` file that is inside `public/` folder.
+
 ## Background
 
 A element, by definition and spec, cannot accept complex properties like objects or arrays. This is a problem when we want to use these kinds of properties in a React project.
