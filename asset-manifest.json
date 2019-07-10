@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-ce-ubigeo/static/css/main.f0b327fa.chunk.css",
+    "main.js": "/react-ce-ubigeo/static/js/main.58ff4bc7.chunk.js",
+    "main.js.map": "/react-ce-ubigeo/static/js/main.58ff4bc7.chunk.js.map",
+    "runtime~main.js": "/react-ce-ubigeo/static/js/runtime~main.bfb28c53.js",
+    "runtime~main.js.map": "/react-ce-ubigeo/static/js/runtime~main.bfb28c53.js.map",
+    "static/js/2.da6cf4bc.chunk.js": "/react-ce-ubigeo/static/js/2.da6cf4bc.chunk.js",
+    "static/js/2.da6cf4bc.chunk.js.map": "/react-ce-ubigeo/static/js/2.da6cf4bc.chunk.js.map",
+    "index.html": "/react-ce-ubigeo/index.html",
+    "precache-manifest.5bfadb988f3d052b01e17e5a6a85acbf.js": "/react-ce-ubigeo/precache-manifest.5bfadb988f3d052b01e17e5a6a85acbf.js",
+    "service-worker.js": "/react-ce-ubigeo/service-worker.js",
+    "static/css/main.f0b327fa.chunk.css.map": "/react-ce-ubigeo/static/css/main.f0b327fa.chunk.css.map",
+    "static/media/cloud.svg": "/react-ce-ubigeo/static/media/cloud.5b118caf.svg"
+  }
+}
