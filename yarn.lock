@@ -4502,6 +4502,13 @@ hastscript@^5.0.0:
     property-information "^5.0.1"
     space-separated-tokens "^1.0.0"
 
+haunted@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/haunted/-/haunted-4.4.0.tgz#416cc09e7fd64e4dbbb5ddc2d2ab9608c699000a"
+  integrity sha512-mKTfwWB282dWI5bU0/3etQUkV8RRJifBCHc8aJbdRH25zTSfODpz20Q6Vc5K8Npzf1gbZbddfaCC88H+MGQY+w==
+  dependencies:
+    lit-html "^1.0.0"
+
 he@1.2.x:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
@@ -5860,6 +5867,11 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+lit-html@^1.0.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.1.1.tgz#186ed6abcc70c0d24e1132b37411c3b2645ed1aa"
+  integrity sha512-1WqhkPpj+CKwLRXCCbyRGnWkcFKE4ft2+j8C2zaXwFUK9I2vYDzTuDGPh0H9hZcDBEwoe6YpPC8AO5734EPORQ==
 
 load-json-file@^2.0.0:
   version "2.0.0"
