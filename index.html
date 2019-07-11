@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="/react-ce-ubigeo/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#212121"/><link rel="manifest" href="/react-ce-ubigeo/manifest.json"/><title>React App</title><link href="/react-ce-ubigeo/static/css/main.f0b327fa.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script type="module">import { LitElement, html, css, property } from 'https://unpkg.com/lit-element@2.2.0/lit-element.js?module'
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="shortcut icon" href="/react-ce-ubigeo/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#212121"/><link rel="manifest" href="/react-ce-ubigeo/manifest.json"/><title>React App</title><link href="/react-ce-ubigeo/static/css/main.f0b327fa.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script type="module">import { component as c, html } from 'https://unpkg.com/haunted@4.4.0/index.js?module'
 
     const converter = {
       toAttribute(value, type) {
@@ -14,20 +14,80 @@
       }
     }
 
-    class UbigeoTable extends LitElement {
-      constructor() {
-        super(...arguments)
-        this.rows = {}
+    const UbigeoTable = function (target) {
+      const rows = target.rows || {}
+
+      const renderRows = function() {
+        return rows.map(department => html`
+          <tr @click=${toggleSelect.bind(this, department)}>
+            <td>${department.code}</td>
+            <td>${department.name}</td>
+            <td>
+              ${renderProvinces(department.provinces)}
+            </td>
+          </tr>  
+        `)
       }
 
-      static get properties() {
-        return {
-          rows: { type: Array, converter }
-        }
+      const renderProvinces = function(provinces) {
+        if (!provinces.length) { return }
+        return html`
+          <table>
+            <thead>
+              <tr>
+                <th>Postal</th>
+                <th>Province</th>
+                <th>Districts</th>  
+              </tr>
+            </thead>
+            <tbody>
+              ${
+                provinces.map(province => html`
+                  <tr>
+                    <td>${province.code}</td>
+                    <td>${province.name}</td>
+                    <td>${renderDistricts(province.districts)}</td>
+                  </tr>
+                `)
+              }
+            </tbody>
+          </table>
+        `
       }
 
-      static get styles() {
-        return css`
+      const renderDistricts = function(districts) {
+        if (!districts.length) { return }
+        return html`
+          <table>
+            <thead>
+              <tr>
+                <th>Postal</th>
+                <th>District</th> 
+              </tr>
+            </thead>
+            <tbody>
+              ${
+                districts.map((district) => html`
+                  <tr>
+                    <td>${district.code}</td>
+                    <td>${district.name}</td>
+                  </tr>
+                `)
+              }
+            </tbody>
+          </table>
+        `
+      }
+
+      const toggleSelect = (row, x) => {
+        console.log(row, x)
+        const detail = row.code
+        const event = new CustomEvent('toggle-row', { detail })
+        this.dispatchEvent(event)
+      }
+
+      return html`
+        <style>
           :host > table {
             display: block;
             border-radius: 5px;
@@ -70,96 +130,22 @@
               display: table;
             }
           }
-        `
-      }
-
-      _renderRows() {
-        return this.rows.map(department => html`
-          <tr @click=${this._toggleSelect.bind(this, department)}>
-            <td>${department.code}</td>
-            <td>${department.name}</td>
-            <td>
-              ${this._renderProvinces(department.provinces)}
-            </td>
-          </tr>  
-        `)
-      }
-
-      _renderProvinces(provinces) {
-        if (!provinces.length) { return }
-        return html`
-          <table>
-            <thead>
-              <tr>
-                <th>Postal</th>
-                <th>Province</th>
-                <th>Districts</th>  
-              </tr>
-            </thead>
-            <tbody>
-              ${
-                provinces.map(province => html`
-                  <tr>
-                    <td>${province.code}</td>
-                    <td>${province.name}</td>
-                    <td>${this._renderDistricts(province.districts)}</td>
-                  </tr>
-                `)
-              }
-            </tbody>
-          </table>
-        `
-      }
-
-      _renderDistricts(districts) {
-        if (!districts.length) { return }
-        return html`
-          <table>
-            <thead>
-              <tr>
-                <th>Postal</th>
-                <th>District</th> 
-              </tr>
-            </thead>
-            <tbody>
-              ${
-                districts.map((district) => html`
-                  <tr>
-                    <td>${district.code}</td>
-                    <td>${district.name}</td>
-                  </tr>
-                `)
-              }
-            </tbody>
-          </table>
-        `
-      }
-
-      _toggleSelect(row, x) {
-        console.log(row, x)
-        const detail = row.code
-        const event = new CustomEvent('toggle-row', { detail })
-        this.dispatchEvent(event)
-      }
-
-      render() {
-        return html`
-          <table>
-            <thead>
-              <tr>
-                <th>Postal</th>
-                <th>Department</th>
-                <th>Provinces</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${this._renderRows()}
-            </tbody>
-          </table>
-        `
-      }
+        </style>
+        <table>
+          <thead>
+            <tr>
+              <th>Postal</th>
+              <th>Department</th>
+              <th>Provinces</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${renderRows()}
+          </tbody>
+        </table>
+      `
     }
 
     if (!customElements.get('ubigeo-table')) {
-      customElements.define('ubigeo-table', UbigeoTable)
+      customElements.define('ubigeo-table', c(UbigeoTable))
     }</script><script>!function(l){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,f=[];i<n.length;i++)t=n[i],c[t]&&f.push(c[t][0]),c[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(l[r]=o[r]);for(s&&s(e);f.length;)f.shift()();return p.push.apply(p,u||[]),a()}function a(){for(var e,r=0;r<p.length;r++){for(var t=p[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==c[u]&&(n=!1)}n&&(p.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},c={1:0},p=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return l[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=l,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/react-ce-ubigeo/";var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;a()}([])</script><script src="/react-ce-ubigeo/static/js/2.da6cf4bc.chunk.js"></script><script src="/react-ce-ubigeo/static/js/main.58ff4bc7.chunk.js"></script></body></html>

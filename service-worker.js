@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/react-ce-ubigeo/precache-manifest.5bfadb988f3d052b01e17e5a6a85acbf.js"
+  "/react-ce-ubigeo/precache-manifest.e7794a8b6a555ae6251626393f4322de.js"
 );
 
 self.addEventListener('message', (event) => {

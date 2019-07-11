@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "28b3218d32f5f2462e9894c77c15b03b",
+    "revision": "d0576d9b1907362df5d255f9933d0943",
     "url": "/react-ce-ubigeo/index.html"
   },
   {
